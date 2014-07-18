@@ -24,15 +24,3 @@ module.exports = (robot) ->
     msg.send "Goodbye, cruel world."
     process.exit 0
 
-  robot.hear /ぬるぽ/, (msg) ->
-    name = msg.envelope.user.name;
-    msg.send '''
- 
-   Λ＿Λ    ＼＼
-  （ ・∀・）   | | ｶﾞｯ
- と       ）   | |
-   Ｙ /ノ     人
-    / ）     <  >  _Λ∩
- ＿/し' ／／  Ｖ｀Д´）/
- （＿フ彡            / ←>> @''' + name + '''
-'''
