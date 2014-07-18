@@ -24,3 +24,5 @@ module.exports = (robot) ->
     msg.send "(人-ω-)｡o.ﾟ｡*･★Good Night★･*｡ﾟo｡"
     process.exit 0
 
+  robot.respond /週報$/i, (msg) ->
+    msg.send "週報書いてね https://webcore.ft.nttcloud.net/redmine/projects/teirei/wiki"
