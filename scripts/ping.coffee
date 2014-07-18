@@ -21,6 +21,6 @@ module.exports = (robot) ->
     msg.send "Server time is: #{new Date()}"
 
   robot.respond /DIE$/i, (msg) ->
-    msg.send "Goodbye, cruel world."
+    msg.send "(人-ω-)｡o.ﾟ｡*･★Good Night★･*｡ﾟo｡"
     process.exit 0
 
