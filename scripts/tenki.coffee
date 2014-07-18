@@ -35,11 +35,23 @@ module.exports = (robot) ->
     ], (err, result) ->
       throw new Error('err catched.') if err
       forecastTime = new Date(result.publicTime)
+      todaymin = "  "
+      todaymin = result.forecasts[0].temperature.min.celsius if result.forecasts[0].temperature.min?
+      todaymax = "  "
+      todaymax = result.forecasts[0].temperature.max.celsius if result.forecasts[0].temperature.max?
+      tomorrowmin = "  "
+      tomorrowmin = result.forecasts[1].temperature.min.celsius if result.forecasts[1].temperature.min?
+      tomorrowmax = "  "
+      tomorrowmax = result.forecasts[1].temperature.max.celsius if result.forecasts[1].temperature.max?
       text = "【お天気情報 #{place}】\n" +
-      "■  #{forecastTime.toFormat("YYYY年MM月DD日HH24時MI分")}の予報です\n" +
-      "予報 : #{result.forecasts[0].telop}\n" +
-      "#{result.description.text}\n" +
-      "詳しい情報は下記を参照\n\n" +
+      "#{result.forecasts[0].dateLabel}の" +
+      "天気 : #{result.forecasts[0].telop}" +
+      "(最低気温 #{todaymin} 〜 最高気温 #{todaymax})\n" +
+
+      "#{result.forecasts[1].dateLabel}の" +
+      "天気 : #{result.forecasts[1].telop}" +
+      "(最低気温 #{tomorrowmin} 〜 最高気温 #{tomorrowmax})\n" +
+
       "#{result.link}"
 
       msg.send text
