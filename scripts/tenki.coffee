@@ -43,7 +43,7 @@ module.exports = (robot) ->
       tomorrowmin = result.forecasts[1].temperature.min.celsius if result.forecasts[1].temperature.min?
       tomorrowmax = "  "
       tomorrowmax = result.forecasts[1].temperature.max.celsius if result.forecasts[1].temperature.max?
-      text = "【お天気情報 #{place}】\n" +
+      text = "【お天気情報 *#{place}*】\n" +
       "#{result.forecasts[0].dateLabel}の" +
       "天気 : #{result.forecasts[0].telop}" +
       "(最低気温 #{todaymin} 〜 最高気温 #{todaymax})\n" +
