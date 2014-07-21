@@ -5,7 +5,9 @@
 #   hubot ping - Reply with pong
 #   hubot echo <text> - Reply back with <text>
 #   hubot time - Reply with current time
-#   hubot die - End hubot process
+#   hubot bye - End hubot process
+#   hubot die - this is fack
+#   hubot adapter - Reply with adapter name
 
 module.exports = (robot) ->
   robot.respond /PING$/i, (msg) ->
@@ -44,7 +46,7 @@ module.exports = (robot) ->
 　　　　||　　　　　　　.||!
 
 
-　　　,__、：．．＜ kill してくれ
+　　　,__、：．．
 　　＜ / '─ - ：．
 　　＜（　 `ｰ'ヽ,＼／￣￣￣￣￣／|
 　　 ’：;￣`ｰ' "／　　　　　　　／ ／|
@@ -53,7 +55,7 @@ module.exports = (robot) ->
 　　　　　　 .||　　　　　　　.||
 '''
 
-  robot.respond /KILL$/i, (msg) ->
+  robot.respond /BYE$/i, (msg) ->
     msg.send "(人-ω-)｡o.ﾟ｡*･★Good Night★･*｡ﾟo｡"
     process.exit 0
 
