@@ -57,7 +57,8 @@ class Sushiyuki
     defaultEmotion = process.env.HUBOT_SUSHIYUKI_DEFAULT_EMOTION
     defaultEmotion = _.sample _.keys @sushiMap if defaultEmotion is "random"
     s = printf '%02d', @sushiMap[emotion] || @sushiMap[defaultEmotion] || @sushiMap.wat
-    return "https://raw.githubusercontent.com/naoya/hubot-sushiyuki/master/sushiyuki_images/#{s}.png"
+    random_pram = Math.floor Math.random() * 1000
+    return "https://raw.githubusercontent.com/naoya/hubot-sushiyuki/master/sushiyuki_images/#{s}.png?a=" + random_pram
 
   emotions: ->
     _.keys @sushiMap
