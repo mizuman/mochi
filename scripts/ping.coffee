@@ -22,6 +22,16 @@ module.exports = (robot) ->
   robot.respond /TIME$/i, (msg) ->
     msg.send "Server time is: #{new Date()}"
 
+  robot.respond /THANK(.*)$/i, (msg) ->
+    msg.send msg.random ["You're welcome! :+1: ", "(´,,・ω・,,`)"]
+
+  robot.respond /THX$/i, (msg) ->
+    msg.send msg.random ["np! :+1: ", ":+1:"]
+
+  robot.respond /ありがとう$/i, (msg) ->
+    msg.send msg.random ["どういたしまして(´,,・ω・,,`)"]
+
+
   robot.respond /DIE$/i, (msg) ->
     msg.send '''
 　-= ∧ ∧
