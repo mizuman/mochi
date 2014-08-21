@@ -9,6 +9,20 @@
 #   hubot die - this is fack
 #   hubot adapter - Reply with adapter name
 
+eastasianwidth = require 'eastasianwidth'
+
+strpad = (str, count) ->
+  new Array(count + 1).join str
+
+String::toArray = ->
+  array = new Array
+  i = 0
+
+  while i < @length
+    array.push @charAt(i)
+    i++
+  array
+
 module.exports = (robot) ->
   robot.respond /PING$/i, (msg) ->
     msg.send "(ｏ'∀'ｏ)ﾉポン!!"
@@ -71,3 +85,36 @@ module.exports = (robot) ->
 
   robot.respond /週報$/i, (msg) ->
     msg.send "週報書いてね https://webcore.ft.nttcloud.net/redmine/projects/teirei/wiki"
+
+
+  robot.hear /突然の(.*)$/i, (msg) ->
+    message = msg.match[1].replace /^\s+|\s+$/g, ''
+    return until message.length
+
+    length = Math.floor eastasianwidth.length(message) / 2
+
+    suddendeath = [
+      "＿#{strpad '人', length + 2}＿"
+      "＞　#{message}　＜"
+      "￣Y#{strpad '^Y', length}￣"
+    ]
+    msg.send suddendeath.join "\n"
+
+  robot.respond /(短冊|tanzaku) (.*)$/i, (msg) ->
+    message = msg.match[2].replace /^\s+|\s+$/g, ''
+    return until message.length
+
+    if message.length >= 16
+      msg.send "メッセージが長過ぎます＞＜ノ 15文字以内にしてね。"
+      return
+
+    tanzaku = [
+      "┏┷┓"
+      "┃　┃"
+    ]
+    for value in message.toArray()
+      tanzaku.push "┃#{value}┃"
+
+    tanzaku.push "┃　┃"
+    tanzaku.push "┗━┛"
+    msg.send tanzaku.join "\n"
