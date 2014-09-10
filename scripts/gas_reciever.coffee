@@ -29,10 +29,13 @@ module.exports = (robot) ->
     try
       if resCode == 200
         message = "#{checkUrl}をチェックしたけど、問題なかったよ"
+      	console.log message        
       else if resCode == "e"
         message = "#{checkUrl}に何か問題があるみたい。#{comment}"
+      	console.log message  
       else
         message = "#{checkUrl}をみたら、#{resCode}が返ってきたよ。大丈夫？"
+      	console.log message  
 
       robot.send user, message
       console.log message
