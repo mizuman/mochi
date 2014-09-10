@@ -36,7 +36,6 @@ module.exports = (robot) ->
       else
         message = "#{checkUrl}をみたら、#{resCode}が返ってきたよ。大丈夫？"
       	console.log message  
-
       robot.send user, message
       console.log message
     catch error
