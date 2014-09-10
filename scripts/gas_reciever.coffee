@@ -30,11 +30,14 @@ module.exports = (robot) ->
 
     try
       if resCode is "200"
-        message = "#{checkUrl}をチェックしたけど、問題なかったよ"
+        message = "#{checkUrl} を覗いたけど、頑張って動いてたよ"
       else
-        message = "#{checkUrl}をみたら、#{resCode}#{comment}が返ってきたよ。大丈夫？"
+        message = "#{checkUrl} をみたら、#{resCode} #{comment} が返ってきたよ。大丈夫？"
+        robot.brain.data.sitecheck = {flag: false}
 
-      robot.send user, message
+      if robot.brain.data.sitecheck.flag isnt true
+	      robot.send user, message
       console.log message
+      robot.brain.data.sitecheck = {flag: true}
     catch error
       console.log "google spreadsheet notifier error: #{error}. Request: #{req.body}"
