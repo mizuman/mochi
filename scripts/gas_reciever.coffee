@@ -18,8 +18,9 @@ module.exports = (robot) ->
 
     return unless query.room
 
-    user = 
-      room: query.room
+    user = room: query.room
+    console.log user
+
 
     checkUrl = query.checkUrl or "URL不明"
     resCode = query.resCode or "未設定"
