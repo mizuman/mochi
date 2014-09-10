@@ -35,7 +35,8 @@ module.exports = (robot) ->
         message = "#{checkUrl} をみたら、#{resCode} #{comment} が返ってきたよ。大丈夫？"
         robot.brain.data.sitecheck = {flag: false}
 
-      if robot.brain.data.sitecheck.flag isnt true
+      sitecheck = robot.brain.data.sitecheck
+      if sitecheck.flag isnt true
 	      robot.send user, message
       console.log message
       robot.brain.data.sitecheck = {flag: true}
