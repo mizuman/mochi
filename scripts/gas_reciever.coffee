@@ -31,6 +31,7 @@ module.exports = (robot) ->
     checkUrl = query.checkUrl or "URL不明"
     resCode = query.resCode or "未設定"
     comment = query.comment or "未設定"
+    talkflag = query.talkflag or "false"
     message = "サイトのチェック結果だよ"
 
     try
@@ -42,7 +43,7 @@ module.exports = (robot) ->
         robot.brain.data.sitecheck = {flag: false}
 
       sitecheck = robot.brain.data.sitecheck
-      if sitecheck.flag isnt true
+      if sitecheck.flag isnt true or talkflag is "true"
 	      robot.send user, message
       console.log message
       robot.brain.data.sitecheck = {flag: true}
