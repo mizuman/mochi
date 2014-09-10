@@ -18,7 +18,8 @@ module.exports = (robot) ->
 
     return unless query.room
 
-    user = room: query.room
+    user = room: "#test"
+    # user = room: query.room
     console.log user
 
 
