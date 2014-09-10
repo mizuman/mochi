@@ -31,7 +31,7 @@ module.exports = (robot) ->
     checkUrl = query.checkUrl or "URL不明"
     resCode = query.resCode or "未設定"
     comment = query.comment or "未設定"
-    talk    = query.talk or ""
+    talk = query.talk or "false"
     message = "サイトのチェック結果だよ"
 
     if talk is "true"
