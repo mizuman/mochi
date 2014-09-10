@@ -27,9 +27,9 @@ module.exports = (robot) ->
     message = "サイトのチェック結果だよ"
 
     try
-      if resCode is 200
+      if resCode == 200
         message = "#{checkUrl}をチェックしたけど、問題なかったよ"
-      else if resCode is "e"
+      else if resCode == "e"
         message = "#{checkUrl}に何か問題があるみたい。#{comment}"
       else
         message = "#{checkUrl}をみたら、#{resCode}が返ってきたよ。大丈夫？"
