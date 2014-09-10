@@ -18,6 +18,11 @@ module.exports = (robot) ->
 
     return unless query.room
 
+    if robot.brain.data.sitecheck
+    	console.log robot.brain.data.sitecheck
+    else 
+    	robot.brain.data.sitecheck = {flag: true}
+
     user = room: "#test"
     # user = room: query.room
     console.log user
@@ -31,6 +36,7 @@ module.exports = (robot) ->
     try
       if resCode is "200"
         message = "#{checkUrl} を覗いたけど、頑張って動いてたよ"
+        robot.brain.data.sitecheck = {flag: true}
       else
         message = "#{checkUrl} をみたら、#{resCode} #{comment} が返ってきたよ。大丈夫？"
         robot.brain.data.sitecheck = {flag: false}
