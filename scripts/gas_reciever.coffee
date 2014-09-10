@@ -23,7 +23,7 @@ module.exports = (robot) ->
     else 
     	robot.brain.data.sitecheck = {flag: true}
 
-    user = room: "#test"
+    user = room: "#random"
     # user = room: query.room
     console.log user
 
@@ -40,6 +40,7 @@ module.exports = (robot) ->
         robot.brain.data.sitecheck = {flag: true}
       else
         message = "#{checkUrl} をみたら、#{resCode} #{comment} が返ってきたよ。大丈夫？"
+        user = room: "#general"
         robot.brain.data.sitecheck = {flag: false}
 
       sitecheck = robot.brain.data.sitecheck
