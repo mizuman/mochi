@@ -24,6 +24,7 @@ module.exports = (robot) ->
 	cronjob_weeklyreport.start()
 
 
+
 	cronjob_voucher = new cronJob('00 45 11 15 * 1-5', () =>
 		envelope = room: "#random"
 		robot.send envelope, "バウチャーはもらった？"
