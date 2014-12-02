@@ -13,12 +13,6 @@ module.exports = (robot) ->
 	)
 	cronjob_payday.start()
 
-	cronjob_bonusday = new cronJob('00 00 7 10 12 1-5', () =>
-		envelope = room: "#random"
-		robot.send envelope, "今日はボーナス日だから早く帰ろう '(ﾟ∀ﾟ*∩ "
-	)
-	cronjob_bonusday.start()
-
 	cronjob_weeklyreport = new cronJob('00 00 9 * * 5', () =>
 		envelope = room: "#general"
 		robot.send envelope, '''
