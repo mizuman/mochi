@@ -6,7 +6,7 @@
 #   HUBOT_GOOGLE_CSE_ID - The ID of your Custom Search Engine
 #
 # Commands:
-#   hubot image me <query> - The Original. Queries Google Images for <query> and returns a random top result.
+#   hubot image me <query> - Queries Google Images for <query> and returns a random top result.
 
 module.exports = (robot) ->
 
