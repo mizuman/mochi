@@ -20,7 +20,7 @@ class Todos
 		@robot.brain.data.todos = {}
 
 		@robot.respond /todo add (.+)$/i, @addItem
-		@robot.hear /todo: (.+)$/i, @addItem
+		@robot.hear /^todo: (.+)$/i, @addItem
 		@robot.respond /todo remove #?(\d+|all)/i, @removeItem
 		@robot.respond /todo (ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
 		@robot.respond /todo clear/i, @clearItems
