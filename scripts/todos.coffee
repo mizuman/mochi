@@ -7,11 +7,12 @@
 #   None
 #
 # Commands:
-#   todo add <description> - Add a new todo with a basic description
-#   todo remove <item number | all> - Remove a todo item from the list
-#   todo clear - Remove finished todos item from the list
-#   todo <ready | start | stop | pending | done> <item number> - set status of a todo item
-#   todo list - List your tasks
+#   todo: <description> - Add a new todo quickly
+#   hubot todo add <description> - Add a new todo with a basic description
+#   hubot todo remove <item number | all> - Remove a todo item from the list
+#   hubot todo clear - Remove finished todos item from the list
+#   hubot todo <ready | start | stop | pending | done> <item number> - set status of a todo item
+#   hubot todo list - List your tasks
 
 
 class Todos
@@ -19,6 +20,7 @@ class Todos
 		@robot.brain.data.todos = {}
 
 		@robot.respond /todo add (.+)$/i, @addItem
+		@robot.hear /todo: (.+)$/i, @addItem
 		@robot.respond /todo remove #?(\d+|all)/i, @removeItem
 		@robot.respond /todo (ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
 		@robot.respond /todo clear/i, @clearItems
