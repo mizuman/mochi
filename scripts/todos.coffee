@@ -42,7 +42,7 @@ class Todos
 
 	help: (msg) =>
 		commands = @robot.helpCommands()
-		commands = (command for command in commands when command.match(/\/todos/))
+		commands = (command for command in commands when command.match(/todo/))
 
 		msg.send commands.join("\n")
 
