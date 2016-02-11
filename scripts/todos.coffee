@@ -179,7 +179,7 @@ class Todos
 		if items.length > 0
 			for todo, index in items
 				icon = @getIcons(todo.status)
-				message += "#{index + 1}) #{icon} #{todo.title}\n"
+				message += "#{icon} #{index + 1}: #{todo.title}\n"
 		else
 			message += "Nothing to do at the moment!"
 
