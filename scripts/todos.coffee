@@ -13,6 +13,7 @@
 #   hubot todo clear - Remove finished todos item from the list
 #   hubot todo <ready | start | stop | pending | done> <item number> - set status of a todo item
 #   hubot todo list - List your tasks
+#   hubot todo insert <item number> into <item number> - change the todo position
 
 
 class Todos
@@ -25,6 +26,7 @@ class Todos
 		@robot.respond /todo (ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
 		@robot.respond /todo clear/i, @clearItems
 		@robot.respond /todo (list|li)$/i, @listItems
+		@robot.respond /todo insert #?(\d+) (in|into|to) #?(\d+)/i, @insertItem
 		@robot.respond /todo help/i, @help
 
 	getIcons: (status) => 
@@ -111,6 +113,39 @@ class Todos
 			message += " You're all done :)"
 
 		msg.send message
+
+	insertItem: (msg) =>
+		user 	   = msg.message.user
+		item_from  = msg.match[1]
+		item_to    = msg.match[3]
+		items      = @getItems(user)
+		totalItems = items.length
+
+		if item_from > totalItems or item_to > totalItems
+			message = "That item doesn't exist."
+			msg.send message
+
+			return
+						
+		else if item_from is item_to
+			message = "It's same position"
+			msg.send message
+
+			return
+
+		else
+			if item_from > item_to
+				item = @robot.brain.data.todos[user.id][item_from-1]
+				@robot.brain.data.todos[user.id].splice(item_from-1, 1)
+				@robot.brain.data.todos[user.id].splice(item_to-1, 0, item)
+			else
+				item = @robot.brain.data.todos[user.id][item_from-1]
+				@robot.brain.data.todos[user.id].splice(item_from-1, 1)
+				@robot.brain.data.todos[user.id].splice(item_to-1, 0, item)
+
+			message = @createListMessage(user)
+			msg.send message
+
 
 	removeItem: (msg) =>
 		user 	   = msg.message.user
