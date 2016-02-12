@@ -19,6 +19,7 @@
 class Todos
 	constructor: (@robot) ->
 		@robot.brain.data.todos = {}
+		@robot.brain.data.todoinfo = {}
 
 		@robot.respond /todo add (.+)$/i, @addItem
 		@robot.hear /^todo: (.+)$/i, @addItem
@@ -28,6 +29,7 @@ class Todos
 		@robot.respond /todo (list|li)$/i, @listItems
 		@robot.respond /todo insert #?(\d+) (in|into|to) #?(\d+)/i, @insertItem
 		@robot.respond /todo help/i, @help
+		@robot.respond /todo config:set (.+)=(.+)/i, @setConfig
 
 	getIcons: (status) => 
 		switch status
@@ -43,6 +45,13 @@ class Todos
 				return ":double_vertical_bar: "
 			else
 				return ":keycap_star: "
+
+	setConfig: (msg) =>
+		user 	   = msg.message.user
+		key = msg.match[1]
+		value = msg.match[2]
+
+		@robot.brain.data.todoinfo[user.id][key] = value
 
 	help: (msg) =>
 		commands = @robot.helpCommands()
@@ -65,10 +74,22 @@ class Todos
 		totalItems = @getItems(user).length
 		multiple   = totalItems isnt 1
 
-		message = "#{totalItems} item" + (if multiple then 's' else '') + " in your list\n\n"
-		message += @createListMessage(user)
+		if @robot.brain.data.todoinfo[user.id]?
+			if @robot.brain.data.todoinfo[user.id]["show_list"] is "enable"
+				message = "#{totalItems} item" + (if multiple then 's' else '') + " in your list\n\n"
+				message += @createListMessage(user)
+				msg.send message
+		else
+			message = "if you want to show list every time.\n"
+			message += "please set config `#{@robot.name} todo config:set show_list=enable`"
+			@robot.brain.data.todoinfo[user.id] = {}
+			@robot.brain.data.todoinfo[user.id]["show_list"] ?= "disable"
+			msg.send message
 
-		msg.send message
+		# message = "#{totalItems} item" + (if multiple then 's' else '') + " in your list\n\n"
+		# message += @createListMessage(user)
+
+		# msg.send message
 
 	setStatus: (msg) =>
 		user 	   = msg.message.user
@@ -126,7 +147,7 @@ class Todos
 			msg.send message
 
 			return
-						
+
 		else if item_from is item_to
 			message = "It's same position"
 			msg.send message
