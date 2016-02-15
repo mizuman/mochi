@@ -65,6 +65,11 @@ class Todos
 		user 	   = msg.message.user
 		title = msg.match[1]
 		status = "ready"
+
+		# TODO: 正規表現なんとかする
+		if title is 'todo' or title is '-t'
+			title = msg.match[3]
+
 		task = {
 			"title": title,
 			"status": status
@@ -94,9 +99,10 @@ class Todos
 		# msg.send message
 
 	setStatus: (msg) =>
+		console.log msg
 		user 	   = msg.message.user
-		status     = msg.match[1]
-		item       = msg.match[2]
+		status     = msg.match[2]
+		item       = msg.match[3]
 		items      = @getItems(user)
 		totalItems = items.length
 
@@ -146,8 +152,8 @@ class Todos
 
 	insertItem: (msg) =>
 		user 	   = msg.message.user
-		item_from  = msg.match[1]
-		item_to    = msg.match[3]
+		item_from  = msg.match[3]
+		item_to    = msg.match[5]
 		items      = @getItems(user)
 		totalItems = items.length
 
@@ -182,7 +188,7 @@ class Todos
 
 	removeItem: (msg) =>
 		user 	   = msg.message.user
-		item       = msg.match[1]
+		item       = msg.match[3]
 		items      = @getItems(user)
 		totalItems = items.length
 
