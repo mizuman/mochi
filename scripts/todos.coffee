@@ -23,7 +23,8 @@ class Todos
 
 		@robot.respond /todo add (.+)$/i, @addItem
 		@robot.hear /^todo: (.+)$/i, @addItem
-		@robot.respond /todo remove #?(\d+|all)/i, @removeItem
+		@robot.respond /todo (remove|delete) #?(\d+|all)/i, @removeItem
+		@robot.respond /todo (edit|update) #?(\d+|all)/i, @editItem
 		@robot.respond /todo (ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
 		@robot.respond /todo clear/i, @clearItems
 		@robot.respond /todo (list|li)$/i, @listItems
@@ -167,6 +168,9 @@ class Todos
 			message = @createListMessage(user)
 			msg.send message
 
+	editItem: (msg) =>
+		message = "sorry. this feature is not available yet."
+		msg.send message
 
 	removeItem: (msg) =>
 		user 	   = msg.message.user
