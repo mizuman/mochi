@@ -8,6 +8,7 @@
 #
 # Commands:
 #   todo: <description> - Add a new todo quickly
+#   hubot todo help
 #   hubot todo add <description> - Add a new todo with a basic description
 #   hubot todo remove <item number | all> - Remove a todo item from the list
 #   hubot todo clear - Remove finished todos item from the list
@@ -25,7 +26,7 @@ class Todos
 		@robot.hear /^todo: (.+)$/i, @addItem
 		@robot.respond /(todo|-t) (rm|remove|delete) #?(\d+|all)/i, @removeItem
 		@robot.respond /(todo|-t) (edit|update) #?(\d+|all)/i, @editItem
-		@robot.respond /(todo|-t) (-r|-p|-s|-ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
+		@robot.respond /(todo|-t) (-r|-p|-s|-d|-ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
 		@robot.respond /(todo|-t) (clear|-c)/i, @clearItems
 		@robot.respond /(todo|-t) (list|li|-l)$/i, @listItems
 		@robot.respond /(todo|-t) (insert|-i) #?(\d+) (in|into|to) #?(\d+)/i, @insertItem
@@ -100,7 +101,7 @@ class Todos
 		totalItems = items.length
 
 		# TODO: 正規表現でちゃんと解決する	
-		if status is 'finish' or status is 'finished'
+		if status is 'finish' or status is 'finished' or status is '-d'
 			status = 'done'
 
 		if status is 'start' or status is '-s'
