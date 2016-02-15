@@ -21,16 +21,16 @@ class Todos
 		@robot.brain.data.todos = {}
 		@robot.brain.data.todoinfo = {}
 
-		@robot.respond /todo add (.+)$/i, @addItem
+		@robot.respond /(todo|-t) (add|-a) (.+)$/i, @addItem
 		@robot.hear /^todo: (.+)$/i, @addItem
-		@robot.respond /todo (remove|delete) #?(\d+|all)/i, @removeItem
-		@robot.respond /todo (edit|update) #?(\d+|all)/i, @editItem
-		@robot.respond /todo (ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
-		@robot.respond /todo clear/i, @clearItems
-		@robot.respond /todo (list|li)$/i, @listItems
-		@robot.respond /todo insert #?(\d+) (in|into|to) #?(\d+)/i, @insertItem
-		@robot.respond /todo help/i, @help
-		@robot.respond /todo config:set (.+)=(.+)/i, @setConfig
+		@robot.respond /(todo|-t) (rm|remove|delete) #?(\d+|all)/i, @removeItem
+		@robot.respond /(todo|-t) (edit|update) #?(\d+|all)/i, @editItem
+		@robot.respond /(todo|-t) (-r|-p|-s|-ready|done|finish|finished|doing|pending|stop|start) #?(\d+)/i, @setStatus
+		@robot.respond /(todo|-t) (clear|-c)/i, @clearItems
+		@robot.respond /(todo|-t) (list|li|-l)$/i, @listItems
+		@robot.respond /(todo|-t) (insert|-i) #?(\d+) (in|into|to) #?(\d+)/i, @insertItem
+		@robot.respond /(todo|-t) (-h|help)/i, @help
+		@robot.respond /(todo|-t) config:set (.+)=(.+)/i, @setConfig
 
 	getIcons: (status) => 
 		switch status
@@ -99,11 +99,18 @@ class Todos
 		items      = @getItems(user)
 		totalItems = items.length
 
+		# TODO: 正規表現でちゃんと解決する	
 		if status is 'finish' or status is 'finished'
 			status = 'done'
 
-		if status is 'start'
+		if status is 'start' or status is '-s'
 			status = 'doing'
+
+		if status is '-r'
+			status = 'ready'
+
+		if status is '-p'
+			status = 'pending'
 
 		# console.log msg
 
