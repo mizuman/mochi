@@ -22,6 +22,7 @@ class Todos
 		@robot.brain.data.todos = {}
 		@robot.brain.data.todoinfo = {}
 
+		# TODO: 正規表現がんばれ
 		@robot.respond /(todo|-t) (add|-a) (.+)$/i, @addItem
 		@robot.hear /^todo: (.+)$/i, @addItem
 		@robot.respond /(todo|-t) (rm|remove|delete) #?(\d+|all)/i, @removeItem
@@ -99,7 +100,6 @@ class Todos
 		# msg.send message
 
 	setStatus: (msg) =>
-		console.log msg
 		user 	   = msg.message.user
 		status     = msg.match[2]
 		item       = msg.match[3]
