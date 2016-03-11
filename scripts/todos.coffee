@@ -143,8 +143,9 @@ class Todos
 
 		if remainingItems.length > 0
 			message += " #{remainingItems.length} item" + (if multiple then 's' else '') + " left:\n\n"
-
-			message += @createListMessage(user)
+			icon =  @getIcons(@robot.brain.data.todos[user.id][item-1].status)
+			title = @robot.brain.data.todos[user.id][item-1].title
+			message += "#{icon} #{item}: #{title}\n"
 		else
 			message += " You're all done :)"
 
