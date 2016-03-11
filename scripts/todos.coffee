@@ -142,7 +142,7 @@ class Todos
 		multiple 	  = remainingItems.length isnt 1
 
 		if remainingItems.length > 0
-			message += " #{remainingItems.length} item" + (if multiple then 's' else '') + " left:\n\n"
+			# message += " #{remainingItems.length} item" + (if multiple then 's' else '') + " left:\n\n"
 			icon =  @getIcons(@robot.brain.data.todos[user.id][item-1].status)
 			title = @robot.brain.data.todos[user.id][item-1].title
 			message += "#{icon} #{item}: #{title}\n"
